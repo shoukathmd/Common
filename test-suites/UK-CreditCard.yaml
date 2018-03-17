@@ -1,0 +1,25 @@
+---
+
+authors:
+  - Intesar Shannan Mohammed
+
+type: DATASET
+
+publishToMarketplace: true
+
+description: CreditCard dataset. Inject using 'cc', 'exp', 'name' , 'type' & 'cvv' properties.
+
+testCases:
+  - id: 1
+    body: '{"cc": "4111 1111 1111 1111", "type": "Visa", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}'
+  - id: 2
+    body: '{"cc": "6011 0000 0000 0004", "type": "Discover", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}'
+  - id: 3
+    body: '{"cc": "5500 0000 0000 0004", "type": "MasterCard", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}'
+  - id: 4
+    body: '{"cc": "3400 0000 0000 009", "type": "American Express", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}'
+  - id: 5
+    body: '{"cc": "3000 0000 0000 04", "type": "Diner's Club", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}'
+
+tags:
+  - DATASET

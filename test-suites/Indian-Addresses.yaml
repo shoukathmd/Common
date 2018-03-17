@@ -1,0 +1,25 @@
+---
+
+authors:
+  - Intesar Shannan Mohammed
+
+type: DATASET
+
+publishToMarketplace: true
+
+description: Address dataset. Inject using 'street', 'city', 'state', 'zipcode', & 'country' properties.
+
+testCases:
+  - id: 1
+    body: '{"street": "2200 Monroe St", "city": "Santa Clara", "state": "CA", "zipcode": "95050", "country": "USA"}'
+  - id: 2
+    body: '{"street": "10500 N De Anza Blvd", "city": "Cupertino", "state": "CA", "zipcode": "95014", "country": "USA"}'
+  - id: 3
+    body: '{"street": "19333 Vallco Pkwy", "city": "Cupertino", "state": "CA", "zipcode": "95014", "country": "USA"}'
+  - id: 4
+    body: '{"street": "10600 N Tantau Ave", "city": "Cupertino", "state": "CA", "zipcode": "95014", "country": "USA"}'
+  - id: 5
+    body: '{"street": "10600 N Tantau Ave", "city": "Cupertino", "state": "CA", "zipcode": "95050", "country": "USA"}'
+
+tags:
+  - DATASET
