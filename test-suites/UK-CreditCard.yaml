@@ -19,7 +19,7 @@ testCases:
   - id: 4
     body: '{"cc": "3400 0000 0000 009", "type": "American Express", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}'
   - id: 5
-    body: '{"cc": "3000 0000 0000 04", "type": "Diner's Club", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}'
+    body: '{"cc": "3000 0000 0000 04", "type": "Diners Club", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}'
 
 tags:
   - DATASET
