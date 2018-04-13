@@ -1,0 +1,6 @@
+[
+	"1 UNION ALL SELECT creditCardNumber,1,1 FROM CreditCardTable", 
+	"10; DELETE FROM users where id=1", 
+	"10 AND 1=1", "1' or '1' = '1'))/*", 
+	"1' or '1' = '1" 
+]
