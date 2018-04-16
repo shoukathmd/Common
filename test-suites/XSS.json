@@ -18,5 +18,11 @@
 	"document.cookie",
 	"DOCUMENT.COOKIE",
 	"DOCUMENT.cookie",
-	"document.COOKIE"
+	"document.COOKIE",
+	".exe",
+	".EXE",
+	"><script",
+	"><SCRIPT",
+	"%3cscript",
+	"%3cSCRIPT",
 ]
