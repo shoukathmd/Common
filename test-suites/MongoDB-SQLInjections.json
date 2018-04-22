@@ -1,9 +1,8 @@
-/* source: https://github.com/cr0hn/nosqlinjection_wordlists/blob/master/mongodb_nosqli.txt */
 [
 	"$",
 	"$where",
 	"$where: function()",
-	"' " \\ ; \{ \}",
+	"' " \\ ; { }",
 	"true, $where: '1 == 1'",
 	", $where: '1 == 1'",
 	"$where: '1 == 1'",
