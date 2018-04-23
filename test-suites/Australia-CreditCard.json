@@ -1,0 +1,7 @@
+[
+  {"cc": "4111 1111 1111 1111", "type": "Visa", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"},
+  {"cc": "6011 0000 0000 0004", "type": "Discover", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"},
+  {"cc": "5500 0000 0000 0004", "type": "MasterCard", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"},
+  {"cc": "3400 0000 0000 009", "type": "American Express", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"},
+  {"cc": "3000 0000 0000 04", "type": "Diners Club", "name": "Firstname Lastname", "exp" : "06/20", "cvv": "111"}
+]

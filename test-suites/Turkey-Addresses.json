@@ -1,0 +1,7 @@
+[
+  {"street": "2200 Monroe St", "city": "Santa Clara", "state": "CA", "zipcode": "95050", "country": "USA"},
+  {"street": "10500 N De Anza Blvd", "city": "Cupertino", "state": "CA", "zipcode": "95014", "country": "USA"},
+  {"street": "19333 Vallco Pkwy", "city": "Cupertino", "state": "CA", "zipcode": "95014", "country": "USA"},
+  {"street": "10600 N Tantau Ave", "city": "Cupertino", "state": "CA", "zipcode": "95014", "country": "USA"},
+  {"street": "10600 N Tantau Ave", "city": "Cupertino", "state": "CA", "zipcode": "95050", "country": "USA"}
+]
