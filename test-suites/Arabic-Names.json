@@ -1,0 +1,12 @@
+/*
+ * Author: Intesar Shannan Mohammed
+ * Description: English name dataset. Inject using '.firstname' & '.lastname' properties.
+ *
+ */
+ [
+    {"firstname": "Intesar", "lastname": "Mohammed"},
+    {"firstname": "Amjad", "lastname": "Afanah"},
+    {"firstname": "Kulsum", "lastname": "Shannan"},
+    {"firstname": "Zainab", "lastname": "Shannan"},
+    {"firstname": "Afrah", "lastname": "Shannan"}
+]
