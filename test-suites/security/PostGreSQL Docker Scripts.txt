@@ -1,0 +1,121 @@
+/*
+Creation Date: 22 Jun 2018
+Created by: Riyaz Shaik
+Company: fxlabs.io
+
+Description: 
+	This creates docker containers for the following 
+		1. PostgreSQL 10.4 database 
+		(
+			22 Jun 208: As of now the environment config step 2.2 parameters are not working but database starts up. 
+			Need to check and fix this.
+		)
+		2. PgAdmin4
+		( 
+			check the tags and the default config options at the page 
+			https://hub.docker.com/r/dpage/pgadmin4/
+		)
+		
+Reference URLs: 
+	/* checked for creating docker scripts here */
+	http://info.crunchydata.com/blog/easy-postgresql-10-and-pgadmin-4-setup-with-docker
+	/*postgresql on windows */
+	https://elanderson.net/2018/02/setup-postgresql-on-windows-with-docker/
+
+
+*/
+
+---- Installing PostGreSQL 10.4 and PgAdmin4 Docker containers to be created 
+
+Step 1: Install Docker
+
+Step 2: Install PostGreSQL 10.4
+	2.1: Need to create workspace - create volume
+
+			mkdir postgres10.4
+			cd postgres10.4
+			docker volume create --driver local --name=pg10.4volume
+
+			/* check status if the above volume is created */
+			docker volume ls
+			
+	2.2: Environment Setup
+			create file pg-10.4-env.list
+				touch pg-10.4-env.list
+				nano pg-10.4-env.list
+				
+			Add the following. 
+				
+				PG_MODE=primary
+				PG_PRIMARY_USER=primeuser
+				PG_PRIMARY_PASSWORD=primeuserpassword
+				PG_DATABASE=fxlabs
+				PG_USER=pguser
+				PG_PASSWORD=pguserpassword
+				PG_ROOT_PASSWORD=pgrootpassword
+				PG_PRIMARY_PORT=5432
+		
+	2.3: Setting up Network
+			docker network create --driver bridge pg10.4network
+		/* check status if the above volume is created */
+			docker network ls
+
+	2.4 Run PostGreSQL10.4
+
+			/* single line docker run statement */
+			docker run --publish 5432:5432 --volume=pg10.4volume:/pgdata --env-file=pg-10.4-env.list --name=postgres10.4 --hostname=postgres10.4 --network=pg10.4network --detach postgres:10.4
+		
+		/* Check status of docker image running */
+			docker ps -f name=postgres10.4
+		
+Step 3: Install pgAdmin4
+	3.1: Setup your workspace
+			docker volume create --driver local --name=pgadmin4volume
+		/* check status if the above volume is created */
+			docker volume ls
+
+	3.2:Setting up environment
+			create file pg4admin-env.list file
+			touch pg4admin-env.list file
+			nano pg4admin-env.list file
+			Add contents to the file 
+		
+			PGADMIN_DEFAULT_EMAIL=riyaz@fxlabs.io
+			PGADMIN_DEFAULT_PASSWORD=riyaz@123
+			SERVER_PORT=80
+
+	3.3: Install pgAdmin4 
+	
+			
+			/* single line docker run statement */
+			docker run -p 5050:80 --volume=pgadmin4volume:/var/lib/pgadmin --env-file=pg4admin-env.list --name=pgadmin4 --hostname=pgadmin4 --network=pg10.4network --detach dpage/pgadmin4
+
+			/* Check status of docker image running */
+			docker ps -f name=pgadmin4
+
+	3.4: Configure pgAdmin4	  
+		http://localhost:5050
+
+Step 4: Change password of postgres immediately after login
+	ALTER USER postgres WITH PASSWORD 'InputYourSecurePassword';
+	
+	
+Step 5: After verifying connection and changing password, now you can stop and start containers 
+
+	/* stopping postgresql containers */
+	docker container stop pgadmin4
+	docker container stop postgres10.4
+
+	/* Check status of docker image running */
+	docker ps 
+	
+	/* starting postgresql containers */
+	docker container start postgres10.4
+	docker container start pgadmin4
+
+	/* Check status of docker image running */
+	docker ps 
+
+	
+	
+	
