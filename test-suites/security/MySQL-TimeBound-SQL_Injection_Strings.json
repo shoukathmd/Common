@@ -1,7 +1,5 @@
 [
-	sam' OR sleep(5)=0; --  ,
-	sam' AND sleep(5)=0; --  ,
-	 sam' or benchmark(500000000,charset('abc')) = 0 ; --  ,
-	 10 OR benchmark(500000000,charset('abc')) = 0 ; --  ,
-	 10 AND benchmark(500000000,charset('abc')) = 0 ; --  
+	1,
+	2,
+	3
 ]
