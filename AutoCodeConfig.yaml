@@ -1,133 +1,237 @@
-#Auto Code Configuration
-
-databases:
-  - name: MySQL
-    version: 5.7
-    description: test
-    inactive: false
-  
-  - name: Oracle
-    version: 12c
-    description: test
-    inactive: true
-  
-  - name: Postgres
-    version: 10
-    description: test
-    inactive: true
-  
-  - name: SQLServer
-    version: 2017
-    description: test
-    inactive: true
-    
-  - name: MongoDB
-    version: 4
-    description: test
-    inactive: true
-    
-logForgingPatterns:
-#  - "INFO:(a-z|A-Z|0-9|.|!|@|#|$|%|&)+"
-#  - "DEBUG:(a-z|A-Z|0-9|.|!|@|#|$|%|&)+"
-#  - "ERROR:"
-
-
-testSuites:
-# - type: <Required, User can't introduce new values> Possible values are anonymous_invalid/auth_invalid/DDOS/XSS_Injection/sql_injection/log_forging/invalid_datatype/special_chars/empty_value/negative_number/create
-#   severity: <Optional, User can't introduce new values> Possible values are Critical/Major/Minor/Trivial [ Default = Major ]
-#   postfix:  <Optional, User defined string - will be appended to the name of the test-suite. [Default is the type given above]
-#   assertions: <Optional, User can provide multiple assertions> [ Default = "@StatusCode != 200" ]
-#     - "@StatusCode != 200"
-#     - "@Response.data.result == 'FAIL'" 
-#   inactive: <Optional, boolean value> true/false [ Default = false]
-
-  - type: anonymous_invalid
-    assertions:
-      - "@StatusCode != 200"
-    severity: Critical
-      
-  - type: auth_invalid
-    assertions:
-      - "@StatusCode != 200"
-    severity: Critical
-      
-  - type: DDOS
-    assertions:
-      - "@StatusCode != 200"
-    severity: Critical
-    # Default params: pageSize, page_size, maxResults, max_results
-    # e.g. adding more params.
-    matches:
-      - name: itemsPerPage
-      #- name: maxNumberOfResults
-
-  - type: XSS_Injection
-    assertions:
-      - "@StatusCode != 200"
-    severity: Critical
-      
-  - type: sql_injection
-    assertions:
-      - "@StatusCode != 200"
-    severity: Critical
-
-  - type: sql_injection_timebound
-    assertions:
-      - "@ResponseTime >= 5000"
-    severity: Critical
-
-  - type: log_forging
-    postfix: log_forging
-    assertions:
-      - "@StatusCode != 200"
-    severity: Critical
-    
-  - type: rbac
-    assertions:
-      - "@StatusCode == 403"
-    severity: Critical
-    # Match is applied in the order patterns are defined and once a match is found the comparision will stop.
-    matches:
-      # comma seperated paths with patterns.
-      # Examples
-      #  api/t?st — matches api/test but also api/tast or api/txst
-      #  api/*-action — matches all action in the api path
-      #  api/**/test — matches all test path underneath the api path
-
-      #- pathPatterns: "/api/volume-utilization/volume-patient-hours, /api/health"
-      #  methods:
-      #  denyRoles: Default
-      - pathPatterns: "/api/**"
-        methods: # empty = GET,POST,PUT,DELETE
-        denyRoles: Anonymous
-
-  - type: invalid_datatype
-    assertions:
-      - "@StatusCode != 200"
-    severity: Major
-
-  - type: special_chars
-      - "@StatusCode != 200"
-    severity: Minor
-
-  - type: negative_number
-    assertions:
-      - "@StatusCode != 200"
-    severity: Minor
-      
-  - type: null_value
-    assertions:
-      - "@StatusCode != 200"
-    severity: Minor
-
-  - type: empty_value
-    assertions:
-      - "@StatusCode != 200"
-    severity: Minor
-    inactive: 
-
-  - type: create
-    assertions:
-      - "@StatusCode == 200"
-    severity: 
-    inactive: true
+---
+genPolicy: "None"
+openAPISpec: "None"
+generators:
+- type: "no_params"
+  assertions:
+  - "@StatusCode == 200"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
+- type: "sla"
+  assertions:
+  - "@StatusCode == 200 AND @ResponseTime < 500"
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: null
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+- type: "anonymous_invalid"
+  assertions:
+  - "@StatusCode == 401 OR @StatusCode == 403"
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: "Get:/api/v1/user-signup/**"
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+- type: "auth_invalid"
+  assertions:
+  - "@StatusCode == 401 OR @StatusCode == 403"
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: ""
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+- type: "auth_invalid_empty"
+  assertions:
+  - "@StatusCode == 401 OR @StatusCode == 403"
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: ""
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+- type: "auth_invalid_sql"
+  assertions:
+  - "@StatusCode == 401 OR @StatusCode == 403"
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: null
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: ""
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+- type: "rbac"
+  assertions:
+  - "@StatusCode == 403"
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: "Admin access"
+    value: null
+    methods: "Post, Put, Delete"
+    denyRoles: "Writer, Reader"
+    allowRoles: "Admin"
+    pathPatterns: "/api/v1/orgs/**, /api/v1/accounts/**"
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+  - name: "Writer access"
+    value: null
+    methods: "Post, Put, Delete"
+    denyRoles: "Reader"
+    allowRoles: "Writer"
+    pathPatterns: "/api/v1/projects/**, /api/v1/regions/**"
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+  - name: "Collaborator access"
+    value: null
+    methods: "Post, Delete"
+    denyRoles: "Collaborator"
+    allowRoles: "Reader, Writer"
+    pathPatterns: "/api/v1/projects/**"
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+  - name: "Reader access"
+    value: null
+    methods: "Get, Post, Put, Delete"
+    denyRoles: "Other"
+    allowRoles: "Reader, Writer"
+    pathPatterns: "/api/v1/**"
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+- type: "DDOS"
+  assertions:
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: "pageSize, page_size, maxResults, max_results"
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: null
+    resourceSamples: null
+    queryParams: null
+    bodyProperties: null
+- type: "XSS_Injection"
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
+- type: "sql_injection_timebound"
+  assertions:
+  - "@ResponseTime < 7000 OR @ResponseTime > 10000"
+  - "@StatusCode != 404"
+  severity: null
+  database:
+    name: "MySQL"
+    version: "5.7"
+  inactive: false
+  matches: []
+- type: "log_Forging"
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
+- type: "invalid_datatype"
+  assertions:
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
+- type: "special_chars "
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
+- type: "null_value"
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
+- type: "empty_value"
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
+- type: "negative_number"
+  assertions:
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
+- type: "create"
+  assertions:
+  - "@StatusCode != 200"
+  - "@StatusCode != 401"
+  - "@StatusCode != 404"
+  - "@StatusCode != 500"
+  severity: null
+  database: null
+  inactive: false
+  matches: null
