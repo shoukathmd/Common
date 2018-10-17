@@ -38,7 +38,13 @@ generators:
 - type: "auth_invalid"
   assertions:
   - "@StatusCode == 401 OR @StatusCode == 403"
-  tags: null
+  tags:
+  - "OWASP A2"
+  - "OWASP A5"
+  - "OWASP A6"
+  - "OWASP A7"
+  - "[PIC DSS 3.0] 6.5.8"
+  - "[PIC DSS 3.0] 6.5.10"
   severity: null
   database: null
   inactive: false
@@ -55,7 +61,13 @@ generators:
 - type: "auth_invalid_empty"
   assertions:
   - "@StatusCode == 401 OR @StatusCode == 403"
-  tags: null
+  tags:
+  - "OWASP A2"
+  - "OWASP A5"
+  - "OWASP A6"
+  - "OWASP A7"
+  - "[PIC DSS 3.0] 6.5.8"
+  - "[PIC DSS 3.0] 6.5.10"
   severity: null
   database: null
   inactive: false
@@ -72,7 +84,9 @@ generators:
 - type: "auth_invalid_sql"
   assertions:
   - "@StatusCode == 401 OR @StatusCode == 403"
-  tags: null
+  tags:
+  - "OWASP A1"
+  - "[PCI DSS 3.0] 6.5.1"
   severity: null
   database: null
   inactive: false
@@ -86,11 +100,30 @@ generators:
     resourceSamples: null
     queryParams: null
     bodyProperties: null
+- type: "rbac"
+  assertions:
+  - "Disallowed:@StatusCode == 401 OR @StatusCode == 403"
+  - "Allowed:@StatusCode != 401 AND @StatusCode != 403"
+  tags: null
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: "ROLE_ADMIN,ROLE_PM,ROLE_USER"
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: null
+    resourceSamples: "Get:/api/v1/orgs/:Allowed[ROLE_ADMIN]\nPost:/api/v1/accounts/:Allowed[ROLE_ADMIN,ROLE_PM]"
+    queryParams: null
+    bodyProperties: null
 - type: "DDOS"
   assertions:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
-  tags: null
+  tags:
+  - "[PCI DSS 3.0] 6.5.2"
   severity: null
   database: null
   inactive: false
@@ -110,7 +143,9 @@ generators:
   - "@StatusCode != 401"
   - "@StatusCode != 404"
   - "@StatusCode != 500"
-  tags: null
+  tags:
+  - "OWASP A3"
+  - "[PIC DSS 3.0] 6.5.7"
   severity: null
   database: null
   inactive: false
@@ -119,7 +154,9 @@ generators:
   assertions:
   - "@ResponseTime < 7000 OR @ResponseTime > 10000"
   - "@StatusCode != 404"
-  tags: null
+  tags:
+  - "OWASP A1"
+  - "[PCI DSS 3.0] 6.5.1"
   severity: null
   database:
     name: "MySQL"
