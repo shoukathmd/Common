@@ -100,6 +100,24 @@ generators:
     resourceSamples: null
     queryParams: null
     bodyProperties: null
+- type: "rbac"
+  assertions:
+  - "Disallowed:@StatusCode == 401 OR @StatusCode == 403"
+  - "Allowed:@StatusCode != 401 AND @StatusCode != 403"
+  tags: null
+  severity: null
+  database: null
+  inactive: false
+  matches:
+  - name: "ROLE_ADMIN,ROLE_PM,ROLE_USER"
+    value: null
+    methods: null
+    denyRoles: null
+    allowRoles: null
+    pathPatterns: null
+    resourceSamples: "Get:/api/v1/orgs/:Allowed[ROLE_ADMIN]\nPost:/api/v1/accounts/:Allowed[ROLE_ADMIN,ROLE_PM]"
+    queryParams: null
+    bodyProperties: null
 - type: "DDOS"
   assertions:
   - "@StatusCode != 401"
